@@ -22,9 +22,6 @@ import com.ciclo4.model.User;
 import com.ciclo4.repository.RoleRepository;
 import com.ciclo4.service.UserServiceImpl;
 
-/**
- * @author CarlinGebyte
- */
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
 		RequestMethod.DELETE })
@@ -46,15 +43,17 @@ public class UserRestController {
 	public List<User> getAll() {
 		return userServiceImpl.getAll();
 	}
+
 	/**
 	 * Regresa un usuario por su id
+	 * 
 	 * @param id
 	 * @return User
 	 */
 	@GetMapping("/{id}")
 	public User getUserById(@PathVariable("id") Integer id) {
 		Optional<User> user = userServiceImpl.getUserById(id);
-		
+
 		if (userServiceImpl.getUserById(id).isPresent()) {
 			return user.get();
 		}

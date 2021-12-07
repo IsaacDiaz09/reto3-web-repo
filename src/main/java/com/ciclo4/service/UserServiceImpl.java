@@ -1,8 +1,6 @@
 package com.ciclo4.service;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -165,16 +163,4 @@ public class UserServiceImpl {
 		return userRepository.findById(idUser);
 	}
 
-	/**
-	 * regresa los roles disponibles de n usuario
-	 * 
-	 * @return Map
-	 */
-	public Map<String, String> getUserRoles() {
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("COORD", "Coordinador de zona");
-		map.put("ASE", "Asesor comercial");
-		map.put("ADM", "Administrador");
-		return map;
-	}
 }

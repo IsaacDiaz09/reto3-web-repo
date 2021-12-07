@@ -106,8 +106,8 @@
 											<label for="txtType" class="col-form-label col-5">Tipo:</label>
 											<div class="col-7">
 												<select id="typeUser" name="type" class="form-control">
-													<option th:each="type: ${roles}" th:value="${type.key}"
-														th:text="${type.value}"></option>
+													<option th:each="type: ${roles}" th:value="${type.name}"
+														th:text="${type.description}"></option>
 												</select>
 											</div>
 										</div>

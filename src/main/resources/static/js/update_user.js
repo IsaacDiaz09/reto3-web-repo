@@ -1,7 +1,13 @@
 import { mostrarMensaje, urlbase, limpiarCamposUser, validaUsuario } from "./utils.js";
 
+// Verifica  el emal fue modificado
+const emailWasModified = (currentEmail,inputEmail) => {
+	return (currentEmail.trim() !== inputEmail.trim());
+}
+
 // Valida los atributos del usuario, entonces lo edita
 $(document).ready(function () {
+	const userEmail = $.trim($("#email").val());
 	$("#btn-user").click(function () {
 		// Se recupera el valor de los campos
 		const nombre = $.trim($("#name").val());
@@ -20,7 +26,8 @@ $(document).ready(function () {
 		} else {
 			// Verificar email no en uso
 			$.get(urlbase + "/user/emailexist/" + email, function (estaEnUso) {
-				if (estaEnUso === false) {
+				
+				if (estaEnUso === false || !emailWasModified(userEmail,email)) {
 					const user = {
 						id: id,
 						name: nombre,

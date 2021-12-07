@@ -44,7 +44,10 @@ public class OrderServiceImpl {
 	public Order createOrder(Order order) {
 		if (!Objects.isNull(order.getId())) {
 			Optional<Order> orderExists = repo.findById(order.getId());
-			if (orderExists.isEmpty()) {
+			if (orderExists.isEmpty()
+					&& (!Objects.isNull(order.getRegisterDay()) && !Objects.isNull(order.getSalesMan())
+							&& !Objects.isNull(order.getProducts()) && !Objects.isNull(order.getQuantities()))) {
+				order.setStatus(Order.PENDING);
 				return repo.save(order);
 			}
 		}
@@ -61,7 +64,34 @@ public class OrderServiceImpl {
 		if (!Objects.isNull(order.getId())) {
 			Optional<Order> orderExists = repo.findById(order.getId());
 			if (orderExists.isPresent()) {
-				return order;
+				String status = order.getStatus();
+
+				Order orderToUpdate = orderExists.get();
+				if (!Objects.isNull(order.getRegisterDay())) {
+					orderToUpdate.setRegisterDay(order.getRegisterDay());
+				}
+				if (!Objects.isNull(status) && (status.equals(Order.APROVED) || status.equals(Order.PENDING)
+						|| status.equals(Order.PENDING))) {
+					orderToUpdate.setStatus(order.getStatus());
+				}
+				if (!Objects.isNull(order.getSalesMan())) {
+					orderToUpdate.setSalesMan(order.getSalesMan());
+
+				}
+				if (!Objects.isNull(order.getRegisterDay())) {
+					orderToUpdate.setRegisterDay(order.getRegisterDay());
+
+				}
+				if (!Objects.isNull(order.getProducts())) {
+					orderToUpdate.setProducts(order.getProducts());
+
+				}
+				if (!Objects.isNull(order.getQuantities())) {
+					orderToUpdate.setQuantities(order.getQuantities());
+
+				}
+
+				return repo.save(orderToUpdate);
 			}
 		}
 		return order;

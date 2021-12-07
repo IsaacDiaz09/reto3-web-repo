@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ciclo4.model.User;
+import com.ciclo4.repository.RoleRepository;
 import com.ciclo4.service.UserServiceImpl;
 
 @Controller
@@ -17,6 +18,9 @@ public class UserController {
 
 	@Autowired
 	private UserServiceImpl service;
+
+	@Autowired
+	private RoleRepository roleRepo;
 
 	@GetMapping
 	public String usersPage(Model model) {
@@ -28,7 +32,7 @@ public class UserController {
 
 	@GetMapping("/add")
 	public String addUser(Model model) {
-		model.addAttribute("roles", service.getUserRoles());
+		model.addAttribute("roles", roleRepo.findAll());
 		model.addAttribute("text_h3", "Registrar usuario");
 		model.addAttribute("user", new User());
 
@@ -40,7 +44,7 @@ public class UserController {
 		user = service.getUserById(user.getId()).get();
 		model.addAttribute("user", user);
 		model.addAttribute("text_h3", "Editar usuario");
-		model.addAttribute("roles", service.getUserRoles());
+		model.addAttribute("roles", roleRepo.findAll());
 
 		return "vistas/users/update-user";
 	}

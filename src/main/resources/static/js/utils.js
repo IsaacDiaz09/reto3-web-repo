@@ -1,5 +1,8 @@
-// Url del end-point rest
-const urlbase = "http://localhost:8080/api";
+// Url del end-point rest - dev
+// const urlbase = "http://localhost:8080/api";
+
+// Url del end-point rest - prod
+const urlbase = "http://129.151.108.97:8080/api";
 
 // RegEx para validar un direccion de email
 const regExEmail =
