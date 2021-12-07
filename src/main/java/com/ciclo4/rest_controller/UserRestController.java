@@ -38,20 +38,34 @@ public class UserRestController {
 	private RoleRepository roleRepository;
 
 	/**
-	 * Método para obtener todos los usuarios
+	 * Metodo para obtener todos los usuarios
 	 *
-	 * @return
+	 * @return List
 	 */
 	@GetMapping("/all")
 	public List<User> getAll() {
 		return userServiceImpl.getAll();
 	}
+	/**
+	 * Regresa un usuario por su id
+	 * @param id
+	 * @return User
+	 */
+	@GetMapping("/{id}")
+	public User getUserById(@PathVariable("id") Integer id) {
+		Optional<User> user = userServiceImpl.getUserById(id);
+		
+		if (userServiceImpl.getUserById(id).isPresent()) {
+			return user.get();
+		}
+		return new User();
+	}
 
 	/**
-	 * Método para crear un usuario
+	 * Metodo para crear un usuario
 	 *
 	 * @param request
-	 * @return
+	 * @return User
 	 */
 	@PostMapping("/new")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -65,10 +79,10 @@ public class UserRestController {
 	}
 
 	/**
-	 * Método para verificar si existe un usuario con el Email ingresado
+	 * Metodo para verificar si existe un usuario con el Email ingresado
 	 *
 	 * @param email
-	 * @return
+	 * @return boolean
 	 */
 	@GetMapping("/emailexist/{correoElectronico}")
 	public boolean byEmail(@PathVariable("correoElectronico") String email) {
@@ -76,11 +90,11 @@ public class UserRestController {
 	}
 
 	/**
-	 * Método para verificar si existe un usuario, Email y Contraseña
+	 * Metodo para verificar si existe un usuario, Email y Contraseña
 	 *
 	 * @param email
 	 * @param pass
-	 * @return
+	 * @return User
 	 */
 	@GetMapping("/{email}/{pass}")
 	public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
@@ -88,10 +102,10 @@ public class UserRestController {
 	}
 
 	/**
-	 * Método para actualizar un usuario
+	 * Metodo para actualizar un usuario
 	 * 
 	 * @param request
-	 * @return
+	 * @return User
 	 */
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -105,7 +119,7 @@ public class UserRestController {
 	}
 
 	/**
-	 * Método para eliminar un usuario
+	 * Metodo para eliminar un usuario
 	 * 
 	 * @param idUser
 	 */

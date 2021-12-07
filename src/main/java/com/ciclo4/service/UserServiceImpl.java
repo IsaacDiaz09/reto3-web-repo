@@ -3,6 +3,7 @@ package com.ciclo4.service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,6 @@ import com.ciclo4.model.User;
 import com.ciclo4.repository.RoleRepository;
 import com.ciclo4.repository.UserRepository;
 
-/**
- * @author CarlinGebyte
- */
 @Service
 public class UserServiceImpl {
 
@@ -28,20 +26,26 @@ public class UserServiceImpl {
 	private RoleRepository roleRepository;
 
 	/**
-	 * Método para obtener todos los usuarios
+	 * Metodo para obtener todos los usuarios
 	 *
-	 * @return
+	 * @return List
 	 */
 	public List<User> getAll() {
 		return userRepository.findAll();
 	}
 
+	/**
+	 * Regreasa rol por su nombre
+	 * 
+	 * @param name
+	 * @return Optional
+	 */
 	public Optional<Role> getRoleByName(String name) {
 		return roleRepository.findByName(name);
 	}
 
 	/**
-	 * Método para crear un usuario
+	 * Metodo para crear un usuario
 	 *
 	 * @param user
 	 * @return User
@@ -51,13 +55,21 @@ public class UserServiceImpl {
 			throw new BaseCustomException("El correo ya existe", HttpStatus.BAD_REQUEST.value());
 		});
 
-		User savedUser = userRepository.save(user);
+		if (!Objects.isNull(user.getId()) && !Objects.isNull(user.getIdentification())
+				&& !Objects.isNull(user.getName()) && !Objects.isNull(user.getBirthtDay())
+				&& !Objects.isNull(user.getMonthBirthtDay()) && !Objects.isNull(user.getAddress())
+				&& !Objects.isNull(user.getCellPhone()) && !Objects.isNull(user.getEmail())
+				&& !Objects.isNull(user.getPassword()) && !Objects.isNull(user.getZone())
+				&& !Objects.isNull(user.getType())) {
 
-		return savedUser;
+			return userRepository.save(user);
+		}
+		return user;
+
 	}
 
 	/**
-	 * Método para verificar si existe un usuario con el Email ingresado
+	 * Metodo para verificar si existe un usuario con el Email ingresado
 	 *
 	 * @param email
 	 * @return boolean
@@ -74,7 +86,7 @@ public class UserServiceImpl {
 	}
 
 	/**
-	 * Método para verificar si existe un usuario, Email y Contraseña
+	 * Metodo para verificar si existe un usuario, Email y Contraseña
 	 *
 	 * @param email
 	 * @param pass
@@ -92,7 +104,7 @@ public class UserServiceImpl {
 	}
 
 	/**
-	 * Método para actualizar un usuario
+	 * Metodo para actualizar un usuario
 	 * 
 	 * @param user
 	 * @return User
@@ -122,7 +134,7 @@ public class UserServiceImpl {
 				if (user.getZone() != null) {
 					exist.get().setZone(user.getZone());
 				}
-				if (user.getType()!= null) {
+				if (user.getType() != null) {
 					exist.get().setType(user.getType());
 				}
 				return userRepository.save(exist.get());
