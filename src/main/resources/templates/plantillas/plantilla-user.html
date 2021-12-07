@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div th:fragment="form-register">
+		<div class="container h-100">
+			<div class="row h-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">
+						<div class="card">
+							<div class="card-body">
+								<div class="text-center">
+									<h3 th:text="${text_h3}"><b></b></h3>
+									<img th:if="${text_h3} == 'Registrar usuario'" th:src="@{/icons/icon_sign-up.png}"
+										width="20%" height="20%">
+								</div>
+							</div>
+							<div class="m-sm-4">
+								<form th:object="${user}">
+									<div class="form-group">
+
+										<div th:if="${text_h3} == 'Registrar usuario'" class="form-group row mb-3">
+											<label for="idUser" class="col-form-label col-5">ID:</label>
+											<div class="col-7">
+												<input type="number" id="idUser" th:field="*{id}"
+													class="form-control" />
+											</div>
+										</div>
+
+										<div th:if="${text_h3} == 'Editar usuario'">
+											<input type="hidden" id="idUser" th:field="*{id}" />
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtNombre" class="col-form-label col-5">Nombre de la
+												Empresa:</label>
+											<div class="col-7">
+												<input type="text" id="name" th:field="*{name}" class="form-control"
+													placeholder="Escriba el nombre" />
+											</div>
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtEmail" class="col-form-label col-5">Email:</label>
+											<div class="col-7">
+												<input type="text" id="email" th:field="*{email}" class="form-control"
+													placeholder="Escriba su email" />
+											</div>
+										</div>
+
+
+										<div class="form-group row mb-3">
+											<label for="txtClave" class="col-form-label col-5">Contraseña</label>
+											<div class="col-7">
+												<input type="password" id="pass" th:field="*{password}"
+													class="form-control" placeholder="Escriba su clave" />
+												<small style="color: gray;">Debe tener minimo 8
+													caracteres</small>
+											</div>
+										</div>
+
+
+										<div class="form-group row mb-3">
+											<label for="passwordrepeat" class="col-form-label col-5">Confirmar
+												contraseña</label>
+											<div class="col-7">
+												<input type="password" id="pass2" class="form-control"
+													placeholder="Confirme su clave" />
+											</div>
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtIdentification"
+												class="col-form-label col-5">Identificacion:</label>
+											<div class="col-7">
+												<input type="number" id="identification" th:field="*{identification}"
+													class="form-control" placeholder="Escriba su identificacion" />
+											</div>
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtCellphone" class="col-form-label col-5">Número celular
+											</label>
+											<div class="col-7">
+												<input type="number" id="cellphone" th:field="*{cellPhone}"
+													class="form-control" placeholder="Escriba su celular" />
+											</div>
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtAddress" class="col-form-label col-5">Dirección:
+											</label>
+											<div class="col-7">
+												<input type="text" id="address" th:field="*{address}"
+													class="form-control" placeholder="Escriba su direccion" />
+											</div>
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtType" class="col-form-label col-5">Tipo:</label>
+											<div class="col-7">
+												<select id="typeUser" name="type" class="form-control">
+													<option th:each="type: ${roles}" th:value="${type.key}"
+														th:text="${type.value}"></option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group row mb-3">
+											<label for="txtZone" class="col-form-label col-5">Zona
+											</label>
+											<div class="col-7">
+												<input type="text" id="zone" th:field="*{zone}" class="form-control"
+													placeholder="Escriba su zona" />
+											</div>
+										</div>
+
+									</div>
+								</form>
+								<div class="text-center">
+									<input type="button" class="btn btn-primary" id="btn-user" style="width: 50%;"
+										value="Guardar" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:fragment="toast">
+		<div class="position-fixed top-0 end-0" style="padding-top: 10px;padding-right: 10px;">
+			<div id="myToast" class="toast" role="alert">
+				<div class="toast-header">
+					<h4 id="titulomensaje"></h4>
+				</div>
+				<div class="toast-body">
+					<p id="cuerpomensaje"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" th:href="@{/icons/favicon.png}" />
+    <title>Home | El mercader</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/bienvenido.css}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+
+<body>
+    <header th:replace="plantillas/plantilla-header :: navBar">
+    </header>
+
+    <div class="container text-center" style="padding-top: 20px">
+        <div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="container text-center" style="padding-top: 20px" ;>
+
+                        <h4>Bienvenido <b>[[${#request.userPrincipal.principal.Name}]]</b></h4>
+                        <h5>Rol: <b>[[${#request.userPrincipal.principal.Role}]]</b></h5>
+                        <hr>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!-- gadgets box -->
+                    <div class="col-sm-6 col-lg-2">
+                        <div class="feature-box-1">
+                            <div class="icon">
+                                <i class="bi bi-pc-display"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="bi bi-pc-display" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V1Zm1 13.5a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0Zm2 0a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0ZM9.5 1a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5ZM9 3.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5ZM1.5 2A1.5 1.5 0 0 0 0 3.5v7A1.5 1.5 0 0 0 1.5 12H6v2h-.5a.5.5 0 0 0 0 1H7v-4H1.5a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5H7V2H1.5Z" />
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h5>Productos</h5>
+                                <a href="/app/gadgets" class="btn btn-primary btn-xs active" role="button">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- users box -->
+                    <div class="col-sm-6 col-lg-2">
+                        <div class="feature-box-1">
+                            <div class="icon">
+                                <i class="bi bi-person-lines-fill"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h5>Usuarios</h5>
+                                <a href="/app/users" class="btn btn-primary btn-xs active" role="button">Ver
+                                    más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

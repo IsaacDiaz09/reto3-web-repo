@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <header th:fragment="navBar">
+        <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <a class="navbar-brand">
+                <img th:src="@{/img/logo_mercader.png}" style="margin-left: 20px;" alt="Logo" width="50px" height="50px" />
+                El mercader LTDA
+            </a>
+            <form class="form-inline" th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" style="margin-right: 20px;">Cerrar
+                    sesion</button>
+            </form>
+        </nav>
+    </header>
+
+</body>
+
+</html>

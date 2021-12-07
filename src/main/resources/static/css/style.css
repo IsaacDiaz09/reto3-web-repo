@@ -1,0 +1,28 @@
+body {
+  font-family: sans-serif;
+  background-color: #108a93;
+}
+
+#login-form {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  margin-left: -110px;
+  margin-top: -75px;
+  -webkit-animation: login 1s ease-in-out;
+  -moz-animation: login 1s ease-in-out;
+  -ms-animation: login 1s ease-in-out;
+  -o-animation: login 1s ease-in-out;
+  animation: login 1s ease-in-out;
+}
+
+.m-sm-4 {
+  margin: 0.9rem 1.5rem !important;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
