@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.ciclo4.model.User;
 
 public class CustomUserDetails implements UserDetails {
+	
     /**
 	 * serialVersionUID
 	 */
@@ -68,5 +69,8 @@ public class CustomUserDetails implements UserDetails {
     public String getRole() {
     	return user.getRole().getDescription();
     }
-
+    
+    public String getZone() {
+    	return user.getZone();
+    }
 }
