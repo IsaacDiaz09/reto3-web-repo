@@ -7,7 +7,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                DrawTableProfile(data);
+                DrawModalProfile(data);
             },
             error: function (xhr, status) {
                 mostrarMensaje('Error', 'Error al obtener la información del usuario', true);
@@ -17,8 +17,7 @@ $(document).ready(function () {
     )
 })
 
-
-const DrawTableProfile = (user) => {
+const DrawModalProfile = (user) => {
 
     let data = `<div class="col-md-12">
     <div class="card mb-3">
@@ -81,5 +80,6 @@ const DrawTableProfile = (user) => {
     </div>`
 
     $("#modal-body").html(data);
+    $("#h5-title").text('Mi perfil');
     $("#myModal").modal('show');
 }
