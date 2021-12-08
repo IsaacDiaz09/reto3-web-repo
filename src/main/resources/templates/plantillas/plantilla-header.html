@@ -1,26 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-    <header th:fragment="navBar">
-        <nav class="navbar navbar-dark bg-dark justify-content-between">
-            <a class="navbar-brand">
-                <img th:src="@{/img/logo_mercader.png}" style="margin-left: 20px;" alt="Logo" width="50px" height="50px" />
-                El mercader LTDA
-            </a>
-            <form class="form-inline" th:action="@{/logout}" method="post">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" style="margin-right: 20px;">Cerrar
-                    sesion</button>
-            </form>
-        </nav>
-    </header>
+	<header th:fragment="navBar">
+		<nav class="navbar navbar-dark bg-dark justify-content-between">
+			<a class="navbar-brand">
+				<img th:src="@{/img/logo_mercader.png}" style="margin-left: 20px;" alt="Logo" width="50px"
+					height="50px" />
+				El mercader LTDA
+			</a>
+			</button>
+
+			<div class="btn-group">
+				<button type="button" class="btn btn-outline-secondary" id="btn-profile">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+						<path fill-rule="evenodd"
+							d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+					</svg>
+					Mi perfil
+				</button>
+			</div>
+
+			<form class="form-inline" th:action="@{/logout}" method="post">
+				<button class="btn btn-outline-danger my-2 my-sm-0" type="submit" style="margin-right: 20px;">Cerrar
+					sesion</button>
+			</form>
+		</nav>
+	</header>
+
+	<div th:fragment="modal-profile">
+		<div class="modal" tabindex="-1" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-center">Mi perfil</h5>
+					</div>
+					<div class="modal-body" id="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 

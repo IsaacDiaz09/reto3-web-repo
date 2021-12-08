@@ -4,6 +4,8 @@
 // Url del end-point rest - prod
 const urlbase = "http://129.151.108.97:8080/api";
 
+const urlASE = "http://localhost:8080";
+
 // RegEx para validar un direccion de email
 const regExEmail =
     /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
@@ -106,7 +108,7 @@ function validaProducto(nombre, idGadget, brand, category, description, price, q
             true
         );
         return false;
-    } else if (RegExUrl.test(photo) === false){
+    } else if (RegExUrl.test(photo) === false) {
         mostrarMensaje(
             "Error",
             "El formato de la url de la imagen es invalido, verifiquelo en intente de nuevo",
@@ -142,4 +144,4 @@ const limpiaCamposGadget = () => {
     $("#photo").val("");
 }
 
-export { mostrarMensaje, campoEstaVacio, urlbase, regExEmail, limpiarCamposUser, limpiaCamposGadget, validaUsuario , validaProducto};
+export { mostrarMensaje, campoEstaVacio, urlbase, urlASE, regExEmail, limpiarCamposUser, limpiaCamposGadget, validaUsuario, validaProducto };

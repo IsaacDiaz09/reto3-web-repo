@@ -88,12 +88,11 @@ public class CustomUserDetails implements UserDetails {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 
 		map.put("name", user.getName());
-		map.put("email", user.getName());
-		map.put("birthtDay", user.getBirthtDay());
-		map.put("monthBirthtDay", user.getMonthBirthtDay());
+		map.put("email", user.getEmail());
 		map.put("cellPhone", user.getCellPhone());
 		map.put("address", user.getAddress());
 		map.put("zone", user.getZone());
+		map.put("role", user.getRole().getDescription());
 
 		return map;
 	}
