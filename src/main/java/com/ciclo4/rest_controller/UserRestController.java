@@ -29,7 +29,7 @@ import com.ciclo4.service.UserServiceImpl;
 public class UserRestController {
 
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserServiceImpl service;
 
 	@Autowired
 	private RoleRepository roleRepository;
@@ -41,7 +41,7 @@ public class UserRestController {
 	 */
 	@GetMapping("/all")
 	public List<User> getAll() {
-		return userServiceImpl.getAll();
+		return service.getAll();
 	}
 
 	/**
@@ -52,9 +52,9 @@ public class UserRestController {
 	 */
 	@GetMapping("/{id}")
 	public User getUserById(@PathVariable("id") Integer id) {
-		Optional<User> user = userServiceImpl.getUserById(id);
+		Optional<User> user = service.getUserById(id);
 
-		if (userServiceImpl.getUserById(id).isPresent()) {
+		if (service.getUserById(id).isPresent()) {
 			return user.get();
 		}
 		return new User();
@@ -72,7 +72,7 @@ public class UserRestController {
 		Optional<Role> role = roleRepository.findByName(user.getType());
 		if (role.isPresent()) {
 			user.setRole(role.get());
-			return userServiceImpl.newUser(user);
+			return service.newUser(user);
 		}
 		return user;
 	}
@@ -85,7 +85,7 @@ public class UserRestController {
 	 */
 	@GetMapping("/emailexist/{correoElectronico}")
 	public boolean byEmail(@PathVariable("correoElectronico") String email) {
-		return userServiceImpl.verifyEmail(email);
+		return service.verifyEmail(email);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class UserRestController {
 	 */
 	@GetMapping("/{email}/{pass}")
 	public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
-		return userServiceImpl.byEmailPass(email, pass);
+		return service.byEmailPass(email, pass);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class UserRestController {
 		Optional<Role> role = roleRepository.findByName(user.getType());
 		if (role.isPresent()) {
 			user.setRole(role.get());
-			return userServiceImpl.editUser(user);
+			return service.editUser(user);
 		}
 		return user;
 	}
@@ -125,6 +125,6 @@ public class UserRestController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Integer idUser) {
-		userServiceImpl.deleteUser(idUser);
+		service.deleteUser(idUser);
 	}
 }

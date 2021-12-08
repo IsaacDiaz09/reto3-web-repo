@@ -1,6 +1,7 @@
 package com.ciclo4.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -157,10 +158,28 @@ public class UserServiceImpl {
 	 * regresa un usuario por id si lo encuentra
 	 * 
 	 * @param idUser
-	 * @return
+	 * @return Optional
 	 */
 	public Optional<User> getUserById(Integer idUser) {
 		return userRepository.findById(idUser);
+	}
+
+	/**
+	 * Verifica si un ASE esta asociado a un COORD por su zona
+	 * 
+	 * @param zone
+	 * @return boolean
+	 */
+	public boolean aseHasCoordByZone(Integer idASE, String zone) throws NoSuchElementException {
+		User ase = userRepository.findByIdAndType(idASE,"ASE").get();
+		List<User> coords = userRepository.findAllByZoneAndType(zone, "COORD");
+
+		for (User coord : coords) {
+			if (coord.getZone().equals(ase.getZone())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
