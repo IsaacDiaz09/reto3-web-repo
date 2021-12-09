@@ -5,7 +5,7 @@ let products = [];
 let salesMan = undefined;
 let ids = [];
 let order = undefined;
-
+// Cuando la pagina se ha cargado trae la informacion del usuario
 $(document).ready(function () {
     $.get(url + "/get_user_info", function (user) {
         $.get(url + "/api/user/" + user.id, function (data) {
@@ -27,7 +27,6 @@ $(document).ready(function () {
 }
 )
 
-
 // Agregar producto al detalle de orden
 $(document).ready(function () {
     $("#btn-add-product").click(function () {
@@ -39,6 +38,7 @@ $(document).ready(function () {
     )
 })
 
+// Obtiene el producto seleccionado, lo agrega a una lista y oculta el modal
 const getProduct = (index) => {
     orderDetail.push(products[index]);
     $("#myModal").modal('hide');
@@ -46,6 +46,7 @@ const getProduct = (index) => {
     $("#save-order").show();
 }
 
+// Dibuja una lista con los productos disponibles en el modal
 const DrawProductsTable = (data) => {
 
     let table = `
@@ -87,6 +88,7 @@ const DrawProductsTable = (data) => {
     })
 }
 
+// Dibuja una tabla con los productos seleccionados
 const DrawDetailTable = (index) => {
     let table = `
     <div class="container h-100 text-center" style="width:70%;">
@@ -128,6 +130,7 @@ const DrawDetailTable = (index) => {
     })
 }
 
+// Obtiene las cantidades a pedir de los productos en el detalle
 const getQuantities = (list_ids) => {
     let dict = {};
 
@@ -138,6 +141,7 @@ const getQuantities = (list_ids) => {
     return dict;
 }
 
+// Construye el objeto de tipo orden (la fecha actual se agrega desde el bak-end)
 const createOrder = (idOrder, perfil, ids) => {
     order = {
         id: idOrder,

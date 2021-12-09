@@ -1,5 +1,6 @@
 import { mostrarMensaje, url } from "./utils.js";
 
+// Cuando el DOM se haya crgado haace una peticion y recupera la informacion del usuario
 $(document).ready(function () {
     $("#btn-profile").click(function () {
         $.ajax({
@@ -17,6 +18,7 @@ $(document).ready(function () {
     )
 })
 
+// Dibuja el modal con los datos del usuario
 const DrawModalProfile = (user) => {
 
     let data = `<div class="col-md-12">
