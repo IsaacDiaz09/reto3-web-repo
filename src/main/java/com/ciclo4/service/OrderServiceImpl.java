@@ -1,5 +1,6 @@
 package com.ciclo4.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -44,10 +45,17 @@ public class OrderServiceImpl {
 	public Order createOrder(Order order) {
 		if (!Objects.isNull(order.getId())) {
 			Optional<Order> orderExists = repo.findById(order.getId());
-			if (orderExists.isEmpty()
-					&& (!Objects.isNull(order.getRegisterDay()) && !Objects.isNull(order.getSalesMan())
-							&& !Objects.isNull(order.getProducts()) && !Objects.isNull(order.getQuantities()))) {
+			if (orderExists.isEmpty() && 
+				(!Objects.isNull(order.getSalesMan()) && !Objects.isNull(order.getProducts())
+					&& !Objects.isNull(order.getQuantities()))
+				) {
+				
 				order.setStatus(Order.PENDING);
+				
+				if (Objects.isNull(order.getRegisterDay())) {
+					order.setRegisterDay(new Date());
+				}
+				
 				return repo.save(order);
 			}
 		}
@@ -80,7 +88,6 @@ public class OrderServiceImpl {
 				}
 				if (!Objects.isNull(order.getRegisterDay())) {
 					orderToUpdate.setRegisterDay(order.getRegisterDay());
-
 				}
 				if (!Objects.isNull(order.getProducts())) {
 					orderToUpdate.setProducts(order.getProducts());
