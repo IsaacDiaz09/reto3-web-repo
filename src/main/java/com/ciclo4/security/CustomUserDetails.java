@@ -87,6 +87,7 @@ public class CustomUserDetails implements UserDetails {
 	public Map<String, Object> getDetails() throws NullPointerException {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 
+		map.put("id", user.getId());
 		map.put("name", user.getName());
 		map.put("email", user.getEmail());
 		map.put("cellPhone", user.getCellPhone());
@@ -96,4 +97,5 @@ public class CustomUserDetails implements UserDetails {
 
 		return map;
 	}
+	
 }

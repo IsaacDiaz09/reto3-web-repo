@@ -26,11 +26,16 @@
 
 	<div class="container h-100">
 		<div class="row h-100">
-			<div class="m-3">
+			<div class="m-3 text-center">
 				<h3>Orden de pedido</h3>
 				<button type="button" class="btn btn-primary" id="btn-add-product">Agregar producto</button>
+				<hr>
+				<h4 id="detail"></h4>
+				<div id="order"></div>
+				<button type="button" id="save-order" class="btn btn-primary" style="display: none;" >Guardar orden</button>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<div th:replace="plantillas/plantilla-header :: modal-profile">

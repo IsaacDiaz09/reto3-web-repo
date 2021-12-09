@@ -1,9 +1,9 @@
-import { mostrarMensaje, urlASE } from "./utils.js";
+import { mostrarMensaje, url } from "./utils.js";
 
 $(document).ready(function () {
     $("#btn-profile").click(function () {
         $.ajax({
-            url: urlASE + "/get_user_info",
+            url: url + "/get_user_info",
             type: 'GET',
             dataType: 'json',
             success: function (data) {

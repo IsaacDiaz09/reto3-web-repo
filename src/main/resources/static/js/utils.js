@@ -4,7 +4,7 @@
 // Url del end-point rest - prod
 const urlbase = "http://129.151.108.97:8080/api";
 
-const urlASE = "http://localhost:8080";
+const url = "http://localhost:8080";
 
 // RegEx para validar un direccion de email
 const regExEmail =
@@ -144,4 +144,4 @@ const limpiaCamposGadget = () => {
     $("#photo").val("");
 }
 
-export { mostrarMensaje, campoEstaVacio, urlbase, urlASE, regExEmail, limpiarCamposUser, limpiaCamposGadget, validaUsuario, validaProducto };
+export { mostrarMensaje, campoEstaVacio, urlbase, url, regExEmail, limpiarCamposUser, limpiaCamposGadget, validaUsuario, validaProducto };
