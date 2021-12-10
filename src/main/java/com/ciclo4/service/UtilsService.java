@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,23 +42,8 @@ public class UtilsService {
 		return false;
 	}
 
-	public List<Order> getAseOrders(Integer id) throws NoSuchElementException {
-		Optional<User> ase = userRepository.findByIdAndType(id, "ASE");
-
-		if (ase.isPresent()) {
-			List<Order> aseOrders = new ArrayList<Order>();
-
-			List<Order> orders = orderRepository.findAll();
-			for (Order order : orders) {
-				if (order.getSalesMan().getId() == ase.get().getId()) {
-					aseOrders.add(order);
-				}
-			}
-
-			return aseOrders;
-		}
-		throw new NoSuchElementException();
-
+	public List<Order> getAseOrders(String zone) {
+		return orderRepository.findByZone(zone);
 	}
 
 	/**

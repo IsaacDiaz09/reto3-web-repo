@@ -1,6 +1,7 @@
 import { mostrarMensaje, urlUtils } from "./utils.js";
+import Constants from "./helpers/constants.js";
 
-// Cuando el DOM se haya crgado haace una peticion y recupera la informacion del usuario
+// Cuando el DOM se haya cargado haace una peticion y recupera la informacion del usuario
 $(document).ready(function () {
     $("#show-orders").click(function () {
         $.ajax({
@@ -58,10 +59,17 @@ const DrawOrdersTable = (orders) => {
         data +=
         `<td>[${productsName}]</td>
         <td>[${Object.values(order.quantities)}]</td>
-        <td>${sum}</td>
-        <td>${order.status}</td>
-        </tr>
-        `
+        <td>${sum}</td>`
+
+        if (order.status == Constants.ORDER_PENDING){
+            data+= `<td class="alert alert-warning" role="alert">${order.status}</td>`
+        } else if (order.status == Constants.ORDER_APROVED) {
+            data+= `<td class="alert alert-success" role="alert">${order.status}</td>`
+        } else if (order.status == Constants.ORDER_REJECTED) {
+            data+= `<td class="alert alert-danger" role="alert">${order.status}</td>`
+        }
+
+        data+=`</tr>`
         // Se reinician las variables usadas
         productsName = [];
         sum = 0;

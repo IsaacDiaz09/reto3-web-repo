@@ -1,5 +1,6 @@
 package com.ciclo4.rest_controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -36,14 +37,13 @@ public class UtilsRestController {
 					HttpStatus.INTERNAL_SERVER_ERROR.value());
 		}
 	}
-	
+
 	@GetMapping("/all_ase_orders")
 	public List<Order> getAseOrders(@AuthenticationPrincipal CustomUserDetails userDetails) {
 		try {
-			return service.getAseOrders(userDetails.getId());
-		} catch (NoSuchElementException e) {
-			throw new BaseCustomException(
-					"No se pudo resolver la solicitud, puede que no seas un Asesor Comercial o no has iniciado sesion",
+			return service.getAseOrders(userDetails.getZone());
+		} catch (Exception e) {
+			throw new BaseCustomException("No se pudo resolver la solicitud, intentalo de nuevo",
 					HttpStatus.INTERNAL_SERVER_ERROR.value());
 		}
 	}
@@ -63,7 +63,9 @@ public class UtilsRestController {
 	@GetMapping("/get_user_zone")
 	public Map<String, String> getUserZone(@AuthenticationPrincipal CustomUserDetails userDetails) {
 		try {
-			return userDetails.getZone();
+			Map<String, String> map = new LinkedHashMap<String, String>();
+			map.put("zone", userDetails.getZone());
+			return map;
 		} catch (NullPointerException e) {
 			throw new BaseCustomException("No se pudo obtener la zona del usuario",
 					HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -73,7 +75,7 @@ public class UtilsRestController {
 	@GetMapping("/ase_has_coord_by_zone")
 	public boolean aseIsAbleToMakeOrders(@AuthenticationPrincipal CustomUserDetails userDetails) {
 		try {
-			return service.aseHasCoordByZone(userDetails.getId(), userDetails.getZone().get("zone"));
+			return service.aseHasCoordByZone(userDetails.getId(), userDetails.getZone());
 		} catch (NoSuchElementException e) {
 			throw new BaseCustomException("No se pudo resolver la solicitud, puede que no seas un Asesor Comercial",
 					HttpStatus.INTERNAL_SERVER_ERROR.value());
