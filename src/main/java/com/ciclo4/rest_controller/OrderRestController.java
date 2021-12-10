@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ciclo4.model.Order;
+import com.ciclo4.repository.OrderRepository;
 import com.ciclo4.service.OrderServiceImpl;
 
 @RestController
@@ -21,10 +22,18 @@ public class OrderRestController {
 
 	@Autowired
 	private OrderServiceImpl service;
+	
+	@Autowired
+	OrderRepository repo;
 
 	@GetMapping("/all")
 	public List<Order> getAll() {
 		return service.getAll();
+	}
+	
+	@GetMapping("/remove__all")
+	public void removeAll() {
+		repo.deleteAll();
 	}
 
 	@GetMapping("/{id}")

@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/app/users/update").hasAuthority("ADM")
 				.antMatchers("/app/users/delete").hasAuthority("ADM")
 				.antMatchers("/app/users/add").hasAuthority("ADM")
+				.antMatchers("/app/orders").hasAuthority("ASE")
                                 .antMatchers("/app/gadgets/add").hasAuthority("ADM")
                                 .antMatchers("/app/gadgets/update").hasAuthority("ADM")
                                 .antMatchers("/app/gadgets/delete").hasAuthority("ADM")

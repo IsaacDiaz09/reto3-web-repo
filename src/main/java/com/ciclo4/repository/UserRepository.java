@@ -34,4 +34,5 @@ public interface UserRepository extends MongoRepository<User, Integer> {
 	 * @return User
 	 */
 	Optional<User> findByIdAndType(Integer idASE, String string);
+	
 }

@@ -5,44 +5,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ciclo4.model.Gadget;
 import com.ciclo4.repository.GadgetRepository;
 
-/**
- * @author CarlinGebyte
- */
 @Service
 public class GadgetServiceImpl {
-	/**
-	 * Atributo gadget repository
-	 */
-	private GadgetRepository gadgetRepository;
+	@Autowired
+	private GadgetRepository repo;
 
 	/**
-	 * Método constructor
+	 * Metodo para listar todos los productos
 	 * 
-	 * @param gadgetRepository
-	 */
-	public GadgetServiceImpl(GadgetRepository gadgetRepository) {
-		this.gadgetRepository = gadgetRepository;
-	}
-
-	/**
-	 * Método para listar todos los productos
-	 * 
-	 * @return
+	 * @return List
 	 */
 	public List<Gadget> getAll() {
-		return gadgetRepository.findAll();
+		return repo.findAll();
 	}
 
 	/**
-	 * Método para crear un Producto
+	 * Regresa los productos que estan disponibles
+	 * 
+	 * @return List
+	 */
+	public List<Gadget> getAllAvailables() {
+		return repo.findByAvailabilityTrue();
+	}
+
+	/**
+	 * Metodo para crear un Producto
 	 * 
 	 * @param gadget
-	 * @return
+	 * @return Gadget
 	 */
 	public Gadget newGadget(Gadget gadget) {
 		if (gadget.getId() != null && gadget.getBrand() != null && gadget.getCategory() != null
@@ -50,7 +46,7 @@ public class GadgetServiceImpl {
 				&& gadget.getAvailability() != null && gadget.getQuantity() != null
 				&& gadget.getPhotography() != null) {
 
-			Gadget savedGadget = gadgetRepository.save(gadget);
+			Gadget savedGadget = repo.save(gadget);
 
 			return savedGadget;
 		}
@@ -58,14 +54,14 @@ public class GadgetServiceImpl {
 	}
 
 	/**
-	 * Método para actualizar Producto
+	 * Metodo para actualizar Producto
 	 * 
 	 * @param gadget
-	 * @return
+	 * @return Gadget
 	 */
 	public Gadget editGadget(Gadget gadget) {
 		if (gadget.getId() != null) {
-			Optional<Gadget> exist = gadgetRepository.findById(gadget.getId());
+			Optional<Gadget> exist = repo.findById(gadget.getId());
 			if (gadget.getBrand() != null) {
 				exist.get().setBrand(gadget.getBrand());
 			}
@@ -90,20 +86,20 @@ public class GadgetServiceImpl {
 			if (gadget.getPhotography() != null) {
 				exist.get().setPhotography(gadget.getPhotography());
 			}
-			return gadgetRepository.save(exist.get());
+			return repo.save(exist.get());
 		}
 		return gadget;
 	}
 
 	/**
-	 * Método para eliminar Programa
+	 * Metodo para eliminar Programa
 	 * 
 	 * @param idGadget
 	 */
 	public void deleteGadget(Integer idGadget) {
-		Optional<Gadget> gadget = gadgetRepository.findById(idGadget);
+		Optional<Gadget> gadget = repo.findById(idGadget);
 		if (gadget.isPresent()) {
-			gadgetRepository.deleteById(idGadget);
+			repo.deleteById(idGadget);
 		}
 	}
 
@@ -114,7 +110,7 @@ public class GadgetServiceImpl {
 	 * @return Optional
 	 */
 	public Optional<Gadget> getGadgetById(Integer id) {
-		return gadgetRepository.findById(id);
+		return repo.findById(id);
 	}
 
 	public Map<Boolean, String> getAvailability() {

@@ -43,7 +43,7 @@ public class UserRestController {
 	public List<User> getAll() {
 		return service.getAll();
 	}
-
+	
 	/**
 	 * Regresa un usuario por su id
 	 * 

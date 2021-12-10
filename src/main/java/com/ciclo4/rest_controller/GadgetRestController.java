@@ -19,55 +19,67 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ciclo4.model.Gadget;
 import com.ciclo4.service.GadgetServiceImpl;
 
-/**
- * @author CarlinGebyte
- */
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
+		RequestMethod.DELETE })
 @RequestMapping("/api/gadget")
 public class GadgetRestController {
 
 	@Autowired
-	private GadgetServiceImpl gadgetService;
+	private GadgetServiceImpl service;
 
-    /**
-     * Método para listar productos
-     * @return
-     */
-    @GetMapping("/all")
-    public List<Gadget> getAll() {
-        return gadgetService.getAll();
-    }
+	/**
+	 * Metodo para listar productos
+	 * 
+	 * @return List
+	 */
+	@GetMapping("/all")
+	public List<Gadget> getAll() {
+		return service.getAll();
+	}
 
-    /**
-     * Método para crear un producto
-     * @param gadget
-     * @return
-     */
-    @PostMapping("/new")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Gadget newGadget(@RequestBody Gadget gadget) {
-        return gadgetService.newGadget(gadget);
-    }
+	/**
+	 * responde unicamente con los productos disponibles
+	 * 
+	 * @return List
+	 */
+	@GetMapping("/all_availables")
+	public List<Gadget> getAllAvailables() {
+		return service.getAllAvailables();
+	}
 
-    /**
-     * Método para actualizar un producto
-     * @param gadget
-     * @return
-     */
-    @PutMapping("/update")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Gadget editGadget(@RequestBody Gadget gadget) {
-        return gadgetService.editGadget(gadget);
-    }
+	/**
+	 * Metodo para crear un producto
+	 * 
+	 * @param gadget
+	 * @return Gadget
+	 */
+	@PostMapping("/new")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Gadget newGadget(@RequestBody Gadget gadget) {
+		return service.newGadget(gadget);
+	}
 
-    /**
-     * Método para eliminar un producto
-     * @param idGadget
-     */
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGadget(@PathVariable("id") Integer idGadget) {
-        gadgetService.deleteGadget(idGadget);
-    }
+	/**
+	 * Metodo para actualizar un producto
+	 * 
+	 * @param gadget
+	 * @returnGadget
+	 */
+	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Gadget editGadget(@RequestBody Gadget gadget) {
+		return service.editGadget(gadget);
+	}
+
+	/**
+	 * Metodo para eliminar un producto
+	 * 
+	 * @param idGadget
+	 */
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteGadget(@PathVariable("id") Integer idGadget) {
+		service.deleteGadget(idGadget);
+	}
 }

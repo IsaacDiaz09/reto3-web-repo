@@ -1,5 +1,6 @@
 package com.ciclo4.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -14,8 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "orders")
-public class Order {
+public class Order implements Serializable {
 
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -9158971418351237361L;
+	
 	public static final String PENDING = "Pendiente";
 	public static final String APROVED = "Aprobada";
 	public static final String REJECTED = "Rechazada";

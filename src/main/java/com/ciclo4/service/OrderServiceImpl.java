@@ -43,23 +43,20 @@ public class OrderServiceImpl {
 	 * @return Order
 	 */
 	public Order createOrder(Order order) {
-		if (!Objects.isNull(order.getId())) {
-			Optional<Order> orderExists = repo.findById(order.getId());
-			if (orderExists.isEmpty() && 
-				(!Objects.isNull(order.getSalesMan()) && !Objects.isNull(order.getProducts())
-					&& !Objects.isNull(order.getQuantities()))
-				) {
-				
-				order.setStatus(Order.PENDING);
-				
-				if (Objects.isNull(order.getRegisterDay())) {
-					order.setRegisterDay(new Date());
-				}
-				
-				return repo.save(order);
+		Optional<Order> orderExists = repo.findById(order.getId());
+		if (orderExists.isEmpty() && (!Objects.isNull(order.getSalesMan()) && !Objects.isNull(order.getProducts())
+				&& !Objects.isNull(order.getQuantities()))) {
+
+			order.setStatus(Order.PENDING);
+
+			if (Objects.isNull(order.getRegisterDay())) {
+				order.setRegisterDay(new Date());
 			}
+
+			return repo.save(order);
 		}
 		return order;
+
 	}
 
 	/**
