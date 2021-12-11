@@ -1,11 +1,11 @@
-import { mostrarMensaje, urlUtils } from "./utils.js";
+import { mostrarMensaje } from "./utils.js";
 import Constants from "./helpers/constants.js";
 
-// Cuando el DOM se haya cargado haace una peticion y recupera la informacion del usuario
+// Cuando el DOM se haya cargado hace una peticion y recupera la informacion del usuario
 $(document).ready(function () {
     $("#show-orders").click(function () {
         $.ajax({
-            url: urlUtils + "/all_ase_orders",
+            url: `${Constants.URL_UTILS}/all_ase_orders`,
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -15,9 +15,10 @@ $(document).ready(function () {
                 mostrarMensaje('Error', 'Error al obtener la información de las ordenes', true);
             }
         });
-    }
-    )
-})
+    })
+}
+)
+
 
 // Se dibuja tabla donde se mostrara el resumen de las ordenes
 const DrawOrdersTable = (orders) => {
@@ -57,26 +58,26 @@ const DrawOrdersTable = (orders) => {
 
         // Se agregan los datos procesados a sus filas
         data +=
-        `<td>[${productsName}]</td>
+            `<td>[${productsName}]</td>
         <td>[${Object.values(order.quantities)}]</td>
         <td>${sum}</td>`
 
-        if (order.status == Constants.ORDER_PENDING){
-            data+= `<td class="alert alert-warning" role="alert">${order.status}</td>`
+        if (order.status == Constants.ORDER_PENDING) {
+            data += `<td class="alert alert-warning" role="alert">${order.status}</td>`
         } else if (order.status == Constants.ORDER_APROVED) {
-            data+= `<td class="alert alert-success" role="alert">${order.status}</td>`
+            data += `<td class="alert alert-success" role="alert">${order.status}</td>`
         } else if (order.status == Constants.ORDER_REJECTED) {
-            data+= `<td class="alert alert-danger" role="alert">${order.status}</td>`
+            data += `<td class="alert alert-danger" role="alert">${order.status}</td>`
         }
 
-        data+=`</tr>`
+        data += `</tr>`
         // Se reinician las variables usadas
         productsName = [];
         sum = 0;
 
     }),
 
-    // Se finaliza el cuerpo de la tabla
+        // Se finaliza el cuerpo de la tabla
         data += `  </tbody>
                 </div></div>`
 

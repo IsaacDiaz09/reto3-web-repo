@@ -1,10 +1,11 @@
-import { mostrarMensaje, urlUtils } from "./utils.js";
+import { mostrarMensaje } from "./utils.js";
+import Constants from "./helpers/constants.js";
 
 // Cuando el DOM se haya crgado haace una peticion y recupera la informacion del usuario
 $(document).ready(function () {
     $("#btn-profile").click(function () {
         $.ajax({
-            url: urlUtils + "/get_user_info",
+            url: Constants.URL_UTILS + "/get_user_info",
             type: 'GET',
             dataType: 'json',
             success: function (data) {

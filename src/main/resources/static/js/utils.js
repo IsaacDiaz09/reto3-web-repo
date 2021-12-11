@@ -1,11 +1,3 @@
-// Url del end-point rest - dev
-// const urlbase = "http://localhost:8080/api";
-
-// Url del end-point rest - prod
-const urlbase = "http://localhost:8080/api";
-
-const urlUtils = "http://localhost:8080/utils";
-
 // RegEx para validar un direccion de email
 const regExEmail =
     /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
@@ -144,4 +136,4 @@ const limpiaCamposGadget = () => {
     $("#photo").val("");
 }
 
-export { mostrarMensaje, campoEstaVacio, urlbase, urlUtils, regExEmail, limpiarCamposUser, limpiaCamposGadget, validaUsuario, validaProducto };
+export { mostrarMensaje, campoEstaVacio, regExEmail, limpiarCamposUser, limpiaCamposGadget, validaUsuario, validaProducto };
