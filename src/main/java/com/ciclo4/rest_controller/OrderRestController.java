@@ -22,7 +22,7 @@ public class OrderRestController {
 
 	@Autowired
 	private OrderServiceImpl service;
-	
+
 	@Autowired
 	OrderRepository repo;
 
@@ -30,7 +30,7 @@ public class OrderRestController {
 	public List<Order> getAll() {
 		return service.getAll();
 	}
-	
+
 	@GetMapping("/remove__all")
 	public void removeAll() {
 		repo.deleteAll();

@@ -76,12 +76,9 @@ public class CustomUserDetails implements UserDetails {
 		return user.getRole().getDescription();
 	}
 
-	public Map<String, String> getZone() throws NullPointerException {
-		Map<String, String> map = new LinkedHashMap<String, String>();
+	public String getZone() throws NullPointerException {
 		
-		map.put("zone", user.getZone());
-		
-		return map;
+		return user.getZone();
 	}
 
 	public Map<String, Object> getDetails() throws NullPointerException {
