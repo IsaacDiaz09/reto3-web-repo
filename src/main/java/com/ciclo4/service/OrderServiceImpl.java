@@ -1,9 +1,7 @@
 package com.ciclo4.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,18 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ciclo4.model.Order;
-import com.ciclo4.model.User;
 import com.ciclo4.repository.OrderRepository;
-import com.ciclo4.repository.UserRepository;
 
 @Service
 public class OrderServiceImpl {
 
 	@Autowired
 	private OrderRepository repo;
-	
-	@Autowired
-	private UserRepository userRepo;
 
 	/**
 	 * Regresa todas las ordenes
@@ -83,7 +76,7 @@ public class OrderServiceImpl {
 					orderToUpdate.setRegisterDay(order.getRegisterDay());
 				}
 				if (!Objects.isNull(status) && (status.equals(Order.APROVED) || status.equals(Order.PENDING)
-						|| status.equals(Order.PENDING))) {
+						|| status.equals(Order.REJECTED))) {
 					orderToUpdate.setStatus(order.getStatus());
 				}
 				if (!Objects.isNull(order.getSalesMan())) {
@@ -121,31 +114,25 @@ public class OrderServiceImpl {
 			}
 		}
 	}
-	
+
 	/**
-	 * trae ordenes por zona para un determinado asesor
-	 * @param id
+	 * Regreasa las ordenes de una zona
+	 * 
 	 * @param zone
 	 * @return List
-	 * @throws NoSuchElementException
 	 */
-	public List<Order> getAllOrderByZone(Integer id, String zone) throws NoSuchElementException{
-			Optional<User> coord = userRepo.findByIdAndType(id, zone);
+	public List<Order> getAseOrders(String zone) {
+		return repo.findByZone(zone);
+	}
 
-			if (coord.isPresent()) {
-				List<Order> aseOrders = new ArrayList<Order>();
-
-				List<Order> orders = repo.findAll();
-				for (Order order : orders) {
-					if (order.getSalesMan().getZone().equals(coord.get().getZone())) {
-						aseOrders.add(order);
-					}
-				}
-
-				return aseOrders;
-			}
-			throw new NoSuchElementException();
-
-		}
-
+	/**
+	 * regresa la ordenes con una zona y estado dados
+	 * 
+	 * @param zone
+	 * @param status
+	 * @return List
+	 */
+	public List<Order> getOrdersByStatusAndZone(String zone,String status) {
+		return repo.findByZoneAndStatus(zone,status);
+	}
 }

@@ -42,10 +42,6 @@ public class UtilsService {
 		return false;
 	}
 
-	public List<Order> getAseOrders(String zone) {
-		return orderRepository.findByZone(zone);
-	}
-
 	/**
 	 * Se busca el id de orden mas alto para evitar conflictos y se regresa
 	 * 

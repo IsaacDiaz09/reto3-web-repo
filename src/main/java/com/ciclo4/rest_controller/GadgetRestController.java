@@ -38,6 +38,11 @@ public class GadgetRestController {
 		return service.getAll();
 	}
 
+	@GetMapping("/{id}")
+	public Gadget getById(@PathVariable("id") Integer id) {
+		return service.getGadgetById(id);
+	}
+
 	/**
 	 * responde unicamente con los productos disponibles
 	 * 

@@ -27,7 +27,7 @@ public class GadgetsController {
 
 	@GetMapping("/update")
 	public String editar(Gadget gadget, Model model) {
-		gadget = service.getGadgetById(gadget.getId()).get();
+		gadget = service.getGadgetById(gadget.getId());
 		model.addAttribute("gadget", gadget);
 		model.addAttribute("text_h3", "Editar producto");
 		model.addAttribute("availability", service.getAvailability());

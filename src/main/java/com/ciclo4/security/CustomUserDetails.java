@@ -67,7 +67,7 @@ public class CustomUserDetails implements UserDetails {
 	public Integer getId() {
 		return user.getId();
 	}
-	
+
 	public String getName() {
 		return user.getName();
 	}
@@ -77,7 +77,6 @@ public class CustomUserDetails implements UserDetails {
 	}
 
 	public String getZone() throws NullPointerException {
-		
 		return user.getZone();
 	}
 
@@ -94,5 +93,5 @@ public class CustomUserDetails implements UserDetails {
 
 		return map;
 	}
-	
+
 }

@@ -107,10 +107,14 @@ public class GadgetServiceImpl {
 	 * Retorna un gadget si lo encuentra
 	 * 
 	 * @param id
-	 * @return Optional
+	 * @return Gadget
 	 */
-	public Optional<Gadget> getGadgetById(Integer id) {
-		return repo.findById(id);
+	public Gadget getGadgetById(Integer id) {
+		Optional<Gadget> gadget =  repo.findById(id);
+		if (gadget.isPresent()) {
+			return gadget.get();
+		}
+		return new Gadget();
 	}
 
 	public Map<Boolean, String> getAvailability() {

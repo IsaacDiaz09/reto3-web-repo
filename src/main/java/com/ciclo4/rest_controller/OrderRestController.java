@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ciclo4.model.Order;
@@ -31,9 +33,9 @@ public class OrderRestController {
 		return service.getAll();
 	}
 
-	@GetMapping("/remove__all")
-	public void removeAll() {
-		repo.deleteAll();
+	@GetMapping("/zona/{zone}")
+	public List<Order> getOrdersByZone(@PathVariable("zone") String zone) {
+		return repo.findByZone(zone);
 	}
 
 	@GetMapping("/{id}")
@@ -46,11 +48,13 @@ public class OrderRestController {
 	}
 
 	@PostMapping("/new")
+	@ResponseStatus(HttpStatus.CREATED)
 	public Order newOrder(@RequestBody Order order) {
 		return service.createOrder(order);
 	}
 
 	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.CREATED)
 	public Order updateOrder(@RequestBody Order order) {
 		return service.updateOrder(order);
 	}
