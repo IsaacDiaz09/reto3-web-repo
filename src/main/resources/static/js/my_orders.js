@@ -35,8 +35,14 @@ const DrawOrdersTable = (orders) => {
                     <th scope="col">Productos</th>
                     <th scope="col">Cantidades</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Estado</th>
-                </tr>
+                    <th scope="col">Estado</th>`
+    if (window.location.href === "http://localhost:8080/app/seguimiento") {
+        data +=
+            `<th scope="col">Aprobar</th>
+                    <th scope="col">Rechazar</th>`
+    }
+
+    data += `</tr>
                 </thead>
                 <tbody>`
 
@@ -70,6 +76,11 @@ const DrawOrdersTable = (orders) => {
             data += `<td class="alert alert-danger" role="alert">${order.status}</td>`
         }
 
+        if (window.location.href === "http://localhost:8080/app/seguimiento") {
+            data += `<td><button class="btn btn-success" id="aprobar-${order.id}">Aprobar</button></td>`
+            data += `<td><button class="btn btn-danger" id="rechazar-${order.id}">Rechazar</button></td>`
+        }
+
         data += `</tr>`
         // Se reinician las variables usadas
         productsName = [];
@@ -85,4 +96,54 @@ const DrawOrdersTable = (orders) => {
     $("#modal-body").html(data);
     $("#h5-title").text('Mis ordenes');
     $("#myModal").modal('show');
+
+    if (window.location.href === "http://localhost:8080/app/seguimiento") {
+
+        orders.forEach(function (product, index) {
+            document.getElementById("aprobar-" + product.id).addEventListener("click", function () {
+                aprobar(product);
+            })
+            document.getElementById("rechazar-" + product.id).addEventListener("click", function () {
+                rechazar(product);
+            })
+        })
+    }
+}
+
+const aprobar = (order) => {
+    order.status = Constants.ORDER_APROVED
+    $.ajax({
+        url: `${Constants.URL_BASE}/order/update`,
+        type: "PUT",
+        data: JSON.stringify(order),
+        dataType: "json",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        statusCode: {
+            201: function () {
+                $("#myModal").modal('hide');
+                mostrarMensaje("Confirmacion", "Orden aprobada exitosamente", false);
+            },
+        },
+    });
+}
+
+const rechazar = (order) => {
+    order.status = Constants.ORDER_REJECTED
+    $.ajax({
+        url: `${Constants.URL_BASE}/order/update`,
+        type: "PUT",
+        data: JSON.stringify(order),
+        dataType: "json",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        statusCode: {
+            201: function () {
+                $("#myModal").modal('hide');
+                mostrarMensaje("Confirmacion", "Orden rechazada exitosamente", false);
+            },
+        },
+    });
 }

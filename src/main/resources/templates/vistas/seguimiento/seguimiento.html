@@ -16,6 +16,7 @@
 		crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="module" th:src="@{/js/profile.js}"></script>
+	<script type="module" th:src="@{/js/new_order.js}"></script>
 	<script type="module" th:src="@{/js/my_orders.js}"></script>
 
 </head>
@@ -27,22 +28,18 @@
 	<div class="container h-100">
 		<div class="row h-100">
 			<div class="m-3">
-				
+
 				<div class="text-center">
 					<h3>Seguimiento Ordenes</h3>
-                                        <button type="button" class="btn btn-warning m-2" onclick="location.href='/app/'">Regresar</button>
-                                        <button type="button" class="btn btn-primary" id="show-orders">Lista ordenes</button>                                        <hr>
-					<h4 id="detail"></h4>
-					<div id="order"></div>
-					<button type="button" id="save-order" class="btn btn-primary" style="display: none;">Guardar
-						orden</button>
-                                        
-                                         <div class="container h-100 text-center">
-      
+					<div class="container h-100">
+						<button type="button" style="text-align: right;" class="btn btn-secondary btn-sm"
+							id="show-orders">Ver
+							Ordenes</button>
+
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<div th:replace="plantillas/plantilla-header :: modal-profile">
